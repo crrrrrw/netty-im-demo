@@ -1,7 +1,7 @@
 package com.crw.netty.im.service;
 
-import com.crw.netty.im.vo.GroupMsgVO;
-import com.crw.netty.im.vo.SingleMsgVO;
+import com.crw.netty.im.protocal.GroupMsgPacket;
+import com.crw.netty.im.protocal.SingleMsgPacket;
 
 /**
  * 消息服务
@@ -13,12 +13,12 @@ public interface MsgService {
      *
      * @param msg
      */
-    void singleMsg(SingleMsgVO msg);
+    void singleMsg(SingleMsgPacket msg);
 
     /**
      * 群聊
      *
      * @param msg
      */
-    void groupMsg(GroupMsgVO msg);
+    void groupMsg(GroupMsgPacket msg);
 }

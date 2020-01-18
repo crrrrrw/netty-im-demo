@@ -7,9 +7,9 @@ import io.netty.channel.CombinedChannelDuplexHandler;
  * @Date: 2020/1/17 15:07
  * @Description:
  */
-public class FastJsonCodec extends CombinedChannelDuplexHandler<FastJsonDecoder, FastJsonEncoder> {
+public class FastJsonCodeC extends CombinedChannelDuplexHandler<FastJsonDecoder, FastJsonEncoder> {
 
-    public FastJsonCodec() {
+    public FastJsonCodeC() {
         super(new FastJsonDecoder(), new FastJsonEncoder());
     }
 

@@ -1,6 +1,6 @@
 package com.crw.netty.im.server;
 
-import com.crw.netty.im.codec.FastJsonCodec;
+import com.crw.netty.im.codec.FastJsonCodeC;
 import com.crw.netty.im.server.handler.ServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -17,16 +17,13 @@ public class Server {
     private EventLoopGroup boss = new NioEventLoopGroup();
     private EventLoopGroup work = new NioEventLoopGroup();
 
+    private static int port = 9090;
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.err.println("非法的参数");
-            return;
-        }
-        new Server().start(Integer.valueOf(args[0]));
+        new Server().start();
     }
 
-    public void start(int port) {
+    public void start() {
         ServerBootstrap bootstrap = new ServerBootstrap()
                 .group(boss, work)
                 .channel(NioServerSocketChannel.class)
@@ -41,7 +38,7 @@ public class Server {
                         channel.pipeline()
                                 //10 秒没有向客户端发送消息就发生心跳
                                 .addLast(new IdleStateHandler(10, 0, 0))
-                                .addLast(new FastJsonCodec())
+                                .addLast(new FastJsonCodeC())
                                 .addLast(new ServerHandler());
                     }
                 });
@@ -49,14 +46,10 @@ public class Server {
         try {
             ChannelFuture future = bootstrap.bind().sync();
             if (future.isSuccess()) {
-                log.info("server started");
                 System.out.println("server started");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } finally {
-            boss.shutdownGracefully().syncUninterruptibly();
-            work.shutdownGracefully().syncUninterruptibly();
         }
     }
 }

@@ -3,6 +3,7 @@ package com.crw.netty.im.client;
 import com.crw.netty.im.client.handler.EchoClientHandler;
 import com.crw.netty.im.codec.FastJsonDecoder;
 import com.crw.netty.im.codec.FastJsonEncoder;
+import com.crw.netty.im.codec.PacketCodeC;
 import com.crw.netty.im.exception.ImException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -23,7 +24,7 @@ public class ImClient {
     private EventLoopGroup group = new NioEventLoopGroup();
 
     private final String serverHost = "localhost";
-    private final int serverPort = 90909;
+    private final int serverPort = 9090;
     private String userName;// 账号
     private String password;// 密码
 
