@@ -1,11 +1,16 @@
-package com.crw.netty.im.protocal;
+package com.crw.netty.im.protocol;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
-@Data
+@Setter
+@Getter
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Packet {
 
     /**
@@ -26,4 +31,9 @@ public abstract class Packet {
 
     @JSONField(serialize = false)
     public abstract Byte getCommand();
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+    }
 }

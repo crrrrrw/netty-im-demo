@@ -1,7 +1,7 @@
 package com.crw.netty.im.server.handler;
 
 import com.crw.netty.im.codec.PacketCodeC;
-import com.crw.netty.im.protocal.Packet;
+import com.crw.netty.im.protocol.Packet;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

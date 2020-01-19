@@ -3,7 +3,7 @@ package com.crw.netty.im.client.handler;
 import com.crw.netty.im.codec.PacketCodeC;
 import com.crw.netty.im.codec.SerializeMethod;
 import com.crw.netty.im.model.User;
-import com.crw.netty.im.protocal.SingleMsgPacket;
+import com.crw.netty.im.protocol.SingleMsgPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

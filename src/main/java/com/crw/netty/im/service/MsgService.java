@@ -1,7 +1,7 @@
 package com.crw.netty.im.service;
 
-import com.crw.netty.im.protocal.GroupMsgPacket;
-import com.crw.netty.im.protocal.SingleMsgPacket;
+import com.crw.netty.im.protocol.GroupMsgPacket;
+import com.crw.netty.im.protocol.SingleMsgPacket;
 
 /**
  * 消息服务

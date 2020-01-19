@@ -1,10 +1,11 @@
-package com.crw.netty.im.protocal;
+package com.crw.netty.im.protocol;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * 指令枚举
  */
 public enum Command {
     LOGIN((byte) 1, "login", null),

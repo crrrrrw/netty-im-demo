@@ -1,7 +1,7 @@
 package com.crw.netty.im.codec;
 
-import com.crw.netty.im.protocal.Command;
-import com.crw.netty.im.protocal.Packet;
+import com.crw.netty.im.protocol.Command;
+import com.crw.netty.im.protocol.Packet;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 

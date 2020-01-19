@@ -1,13 +1,17 @@
-package com.crw.netty.im.protocal;
+package com.crw.netty.im.protocol;
 
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 /**
  * 单聊包
  */
-@Data
+
+@Setter
+@Getter
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SingleMsgPacket extends Packet {
 
     private static final long serialVersionUID = -1302678252721280433L;
