@@ -20,7 +20,7 @@ public class ImClientStarter {
         try {
             imClient = new ImClient(userName, password);
             imClient.start();
-            System.out.printf("用户 [s%] 登录成功", userName);
+            System.out.printf("用户 [%s] 登录成功", userName);
         } catch (ImException e) {
             System.err.println(e.getMessage());
         }

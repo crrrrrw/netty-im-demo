@@ -3,7 +3,9 @@ package com.crw.netty.im.client;
 import com.crw.netty.im.client.handler.EchoClientHandler;
 import com.crw.netty.im.codec.PacketCodec;
 import com.crw.netty.im.exception.ImException;
+import com.crw.netty.im.protocol.SingleMsgPacket;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
@@ -24,6 +26,7 @@ public class ImClient {
     private final int serverPort = 9090;
     private String userName;// 账号
     private String password;// 密码
+    private Channel channel;
 
     public ImClient(String userName, String password) {
         this.userName = userName;
@@ -39,27 +42,27 @@ public class ImClient {
     }
 
     public void start() throws Exception {
-        try {
-            init();
-            Bootstrap b = new Bootstrap();
-            b.group(group)
-                    .channel(NioSocketChannel.class)
-                    .remoteAddress(new InetSocketAddress(serverHost, serverPort))
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        public void initChannel(SocketChannel ch) {
-                            ch.pipeline()
-                                    .addLast(new PacketCodec())
-                                    .addLast(new EchoClientHandler());
-                        }
-                    });
+        init();
+        Bootstrap b = new Bootstrap();
+        b.group(group)
+                .channel(NioSocketChannel.class)
+                .remoteAddress(new InetSocketAddress(serverHost, serverPort))
+                .handler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    public void initChannel(SocketChannel ch) {
+                        ch.pipeline()
+                                .addLast(new PacketCodec())
+                                .addLast(new EchoClientHandler());
+                    }
+                });
 
-            ChannelFuture f = b.connect().sync();
+        ChannelFuture future = b.connect().sync();
 
-            f.channel().closeFuture().sync();
-        } finally {
-            group.shutdownGracefully().sync();
+        if (future.isSuccess()) {
+            System.out.println("client start success");
+            channel = future.channel();
         }
+
     }
 
     private boolean checkAccount(String userName, String password) {
@@ -68,6 +71,11 @@ public class ImClient {
     }
 
     public void send(String userId, String text) {
-
+        SingleMsgPacket msg = SingleMsgPacket.builder()
+                .destUserId(Long.valueOf(userId))
+                .msg(text)
+                .build();
+        ChannelFuture future = channel.writeAndFlush(msg);
+        future.addListener(channelFuture -> System.out.println("客户端发送消息:" + msg));
     }
 }

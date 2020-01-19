@@ -22,14 +22,14 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println("connect success!");
 
         // 写数据
-        ctx.writeAndFlush(SingleMsgPacket.builder()
-                .fromUserId(1L)
-                .destUserId(2L)
-                .msg("hello~")
-                .reqId(UUID.randomUUID().toString())
-                .serializeMethod(SerializeMethod.JSON.method())
-                .version((byte) 1)
-                .build());
+//        ctx.writeAndFlush(SingleMsgPacket.builder()
+//                .fromUserId(1L)
+//                .destUserId(2L)
+//                .msg("hello~")
+//                .reqId(UUID.randomUUID().toString())
+//                .serializeMethod(SerializeMethod.JSON.method())
+//                .version((byte) 1)
+//                .build());
     }
 
     @Override
