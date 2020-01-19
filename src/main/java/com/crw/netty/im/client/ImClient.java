@@ -1,9 +1,7 @@
 package com.crw.netty.im.client;
 
 import com.crw.netty.im.client.handler.EchoClientHandler;
-import com.crw.netty.im.codec.FastJsonDecoder;
-import com.crw.netty.im.codec.FastJsonEncoder;
-import com.crw.netty.im.codec.PacketCodeC;
+import com.crw.netty.im.codec.PacketCodec;
 import com.crw.netty.im.exception.ImException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -14,7 +12,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.net.InetSocketAddress;
-import java.util.Scanner;
 
 /**
  * 客户端类
@@ -52,8 +49,7 @@ public class ImClient {
                         @Override
                         public void initChannel(SocketChannel ch) {
                             ch.pipeline()
-                                    .addLast(new FastJsonDecoder())
-                                    .addLast(new FastJsonEncoder())
+                                    .addLast(new PacketCodec())
                                     .addLast(new EchoClientHandler());
                         }
                     });

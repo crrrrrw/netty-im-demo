@@ -1,6 +1,6 @@
 package com.crw.netty.im.server;
 
-import com.crw.netty.im.codec.FastJsonCodeC;
+import com.crw.netty.im.codec.PacketCodec;
 import com.crw.netty.im.server.handler.ServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -38,7 +38,7 @@ public class Server {
                         channel.pipeline()
                                 //10 秒没有向客户端发送消息就发生心跳
                                 .addLast(new IdleStateHandler(10, 0, 0))
-                                .addLast(new FastJsonCodeC())
+                                .addLast(new PacketCodec())
                                 .addLast(new ServerHandler());
                     }
                 });
